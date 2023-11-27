@@ -7,7 +7,8 @@ What I hope to accomplish by undertaking this project:
 
 - Write system code to familiarize myself with the Unix ecosystem and the C language.
 - Write production-level code through Test Driven Development (TDD).
-- Learn good practices for releasing versioned products
+- Write programs that operate on the principal of "least privilege".
+- Learn good practices for releasing versioned products.
 
 ## Binaries to Write:
 
@@ -22,5 +23,6 @@ What I hope to accomplish by undertaking this project:
 | `cat` | Not Started |
 | `file` | Not Started |
 | `find` | Not Started |
+| `whoami` | Not Started |
 
 Many more will be added, but these are the starting few.
