@@ -183,6 +183,37 @@ get_cmd (console_t * p_console, char * p_cmd)
                 goto EXIT;
             break;
 
+            case KEY_BACKSPACE:
+                // Bounds check.
+                if (0 == cmd_idx) { break; }
+
+                // Move cursor back.
+                printf("\b");
+
+                // Shift characters in front of the cursor forward.
+                for (size_t i = cmd_idx; i < cmd_len; ++i)
+                {
+                    p_cmd[i - 1] = p_cmd[i];
+                    printf("%c", p_cmd[i]);
+                }
+
+                // Clear last character.
+                printf(" ");
+
+                // Return cursor to position.
+                for (size_t i = cmd_idx; i < cmd_len; ++i)
+                {
+                    printf("\b");
+                }
+                printf("\b");
+
+                // Update variables.
+                fflush(stdout);
+                p_cmd[cmd_len - 1] = '\0';
+                cmd_idx--;
+                cmd_len--;
+            break;
+
             default:
                 // Bounds check.
                 if (cmd_len >= DEFAULT_CMD_MAXLEN) { break; }
@@ -262,7 +293,7 @@ console_run (console_t * p_console)
             fflush(stdout);
             break;
         }
-        else if (1 == status)
+        if (1 == status)
         {
             // Cancel command.
             if (0 == strlen(p_cmd))
@@ -285,7 +316,6 @@ console_run (console_t * p_console)
     EXIT:
         // Finalize the console settings before exiting.
         console_finalize(p_console);
-        return;
 }
 
 /*!
